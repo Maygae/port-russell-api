@@ -1,0 +1,25 @@
+<%- include('layout') %>
+
+<h1>Modifier le catway <%= catway.catwayNumber %></h1>
+
+<p><a href="/catways">Retour à la liste</a></p>
+
+<% if (errors) { %>
+  <p style="color:red;"><%= errors %></p>
+<% } %>
+
+<form action="/catways/<%= catway._id %>" method="post">
+  <div>
+    <label>Numéro :</label>
+    <input type="number" value="<%= catway.catwayNumber %>" disabled />
+  </div>
+  <div>
+    <label>Type :</label>
+    <input type="text" value="<%= catway.catwayType %>" disabled />
+  </div>
+  <div>
+    <label>État :</label>
+    <input type="text" name="catwayState" value="<%= catway.catwayState %>" required />
+  </div>
+  <button type="submit">Mettre à jour</button>
+</form>

@@ -1,0 +1,28 @@
+<%- include('layout') %>
+
+<h1>Créer un catway</h1>
+
+<p><a href="/catways">Retour à la liste</a></p>
+
+<% if (errors) { %>
+  <p style="color:red;"><%= errors %></p>
+<% } %>
+
+<form action="/catways" method="post">
+  <div>
+    <label>Numéro :</label>
+    <input type="number" name="catwayNumber" required />
+  </div>
+  <div>
+    <label>Type :</label>
+    <select name="catwayType" required>
+      <option value="short">short</option>
+      <option value="long">long</option>
+    </select>
+  </div>
+  <div>
+    <label>État :</label>
+    <input type="text" name="catwayState" required />
+  </div>
+  <button type="submit">Enregistrer</button>
+</form>

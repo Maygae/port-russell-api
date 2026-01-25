@@ -1,0 +1,49 @@
+<%- include('../layout', { title: 'Catways' }) %>
+
+<main>
+  <h2>Gestion des catways</h2>
+
+  <p>
+    Connecté : <strong><%= user.username %></strong> (<%= user.email %>)
+  </p>
+
+  <p>
+    <a href="/dashboard">Retour au tableau de bord</a> |
+    <a href="/catways/new">Nouveau catway</a>
+  </p>
+
+  <table border="1" cellspacing="0" cellpadding="4">
+    <thead>
+      <tr>
+        <th>Numéro</th>
+        <th>Type</th>
+        <th>État</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (!catways || catways.length === 0) { %>
+        <tr><td colspan="4">Aucun catway.</td></tr>
+      <% } else { %>
+        <% catways.forEach(c => { %>
+          <tr>
+            <td><%= c.number || c.catwayNumber %></td>
+            <td><%= c.type || c.catwayType %></td>
+            <td><%= c.state || c.catwayState %></td>
+            <td>
+              <a href="/catways/<%= c._id %>/edit">Modifier</a>
+              <form action="/catways/<%= c._id %>/delete" method="post" style="display:inline;">
+                <button type="submit" onclick="return confirm('Supprimer ce catway ?');">
+                  Supprimer
+                </button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      <% } %>
+    </tbody>
+  </table>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<%- include('../layout', { title: 'Nouvelle réservation' }) %>
+
+<main>
+  <h2>Nouvelle réservation</h2>
+
+  <p>Connecté : <strong><%= user.username %></strong> (<%= user.email %>)</p>
+
+  <p><a href="/app/reservations">Retour à la liste</a></p>
+
+  <% if (errors) { %>
+    <p style="color:red;"><%= errors %></p>
+  <% } %>
+
+  <form method="post" action="/app/reservations">
+    <div>
+      <label for="catwayNumber">Catway :</label>
+      <select id="catwayNumber" name="catwayNumber" required>
+        <% catways.forEach(c => { %>
+          <option value="<%= c.catwayNumber %>">
+            <%= c.catwayNumber %> (<%= c.catwayType %>)
+          </option>
+        <% }) %>
+      </select>
+    </div>
+    <div>
+      <label for="clientName">Client :</label>
+      <input type="text" id="clientName" name="clientName" required>
+    </div>
+    <div>
+      <label for="boatName">Bateau :</label>
+      <input type="text" id="boatName" name="boatName" required>
+    </div>
+    <div>
+      <label for="startDate">Du :</label>
+      <input type="date" id="startDate" name="startDate" required>
+    </div>
+    <div>
+      <label for="endDate">Au :</label>
+      <input type="date" id="endDate" name="endDate" required>
+    </div>
+    <button type="submit">Créer</button>
+  </form>
+</main>
+
+</body>
+</html>

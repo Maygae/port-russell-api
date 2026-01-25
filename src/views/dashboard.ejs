@@ -1,0 +1,69 @@
+<%- include('layout', { title: 'Tableau de bord' }) %>
+
+<main class="container">
+  <h2>Tableau de bord</h2>
+
+  <section>
+    <p>
+      Utilisateur connecté :
+      <strong><%= user && user.username ? user.username : 'Inconnu' %></strong>
+      (<%= user && user.email ? user.email : 'email inconnu' %>)
+    </p>
+    <p>Date du jour : <%= currentDate %></p>
+  </section>
+
+  <hr />
+
+  <section>
+  <h3>Menu</h3>
+  <ul>
+    <li><a href="/app/catways">Gestion des catways</a></li>
+    <li><a href="/app/reservations">Gestion des réservations</a></li>
+    <li><a href="/app/users">Gestion des utilisateurs</a></li>
+    <li><a href="/api-docs" target="_blank">Documentation de l'API</a></li>
+  </ul>
+
+  <form action="/auth/logout" method="post" style="margin-top: 10px;">
+    <button type="submit" class="btn">Se déconnecter</button>
+  </form>
+</section>
+
+
+  <hr />
+
+  <section>
+    <h3>Réservations en cours</h3>
+
+    <% if (!reservations || reservations.length === 0) { %>
+      <p>Aucune réservation en cours.</p>
+    <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Catway</th>
+            <th>Client</th>
+            <th>Bateau</th>
+            <th>Du</th>
+            <th>Au</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% reservations.forEach(r => { %>
+            <tr>
+              <td><%= r.catwayNumber %></td>
+              <td><%= r.clientName %></td>
+              <td><%= r.boatName %></td>
+              <td><%= r.startDateFormatted %></td>
+              <td><%= r.endDateFormatted %></td>
+              <td><%= r.status %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+  </section>
+</main>
+
+</body>
+</html>

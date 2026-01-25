@@ -1,0 +1,49 @@
+<%- include('../layout', { title: 'Réservations' }) %>
+
+<main>
+  <h2>Gestion des réservations</h2>
+
+  <p>Connecté : <strong><%= user.username %></strong> (<%= user.email %>)</p>
+
+  <p>
+    <a href="/dashboard">Retour au tableau de bord</a> |
+    <a href="/app/reservations/new">Nouvelle réservation</a>
+  </p>
+
+  <% if (!reservations || reservations.length === 0) { %>
+    <p>Aucune réservation.</p>
+  <% } else { %>
+    <table border="1" cellspacing="0" cellpadding="4">
+      <thead>
+        <tr>
+          <th>Catway</th>
+          <th>Client</th>
+          <th>Bateau</th>
+          <th>Du</th>
+          <th>Au</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% reservations.forEach(r => { %>
+          <tr>
+            <td><%= r.catwayNumber %></td>
+            <td><%= r.clientName %></td>
+            <td><%= r.boatName %></td>
+            <td><%= r.startDate %></td>
+            <td><%= r.endDate %></td>
+            <td>
+              <a href="/app/reservations/<%= r._id %>/edit">Modifier</a>
+              <form action="/app/reservations/<%= r._id %>/delete" method="post" style="display:inline;">
+                <button type="submit">Supprimer</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</main>
+
+</body>
+</html>
